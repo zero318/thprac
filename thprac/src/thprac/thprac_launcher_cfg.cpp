@@ -600,7 +600,7 @@ public:
             ImGui::OpenPopup(XSTR(THPRAC_UPDATE_MODAL));
         }
         if (GuiModal(XSTR(THPRAC_UPDATE_MODAL))) {
-            ImGui::TextUnformatted(XSTR(THPRAC_UPDATE_PROMPT), mUpdVerStr.c_str());
+            ImGui::Text(XSTR(THPRAC_UPDATE_PROMPT), mUpdVerStr.c_str());
             ImGui::NewLine();
             //ImGui::TextUnformatted(UpdateJsonDbg().c_str());
 
@@ -1592,7 +1592,7 @@ private:
                 }
             }
         } else {
-            ImGui::TextUnformatted(XSTR(THPRAC_THCRAP_LOCATION), mThcrap.Get().c_str());
+            ImGui::Text(XSTR(THPRAC_THCRAP_LOCATION), mThcrap.Get().c_str());
             if (GuiButtonAndModalYesNo(XSTR(THPRAC_THCRAP_UNSET), XSTR(THPRAC_THCRAP_UNSET_MODAL), XSTR(THPRAC_THCRAP_UNSET_TXT), -1.0f, XSTR(THPRAC_YES), XSTR(THPRAC_NO))) {
                 mThcrap.Set(std::string(""));
                 mThcrapHintTime = 0.0f;
@@ -1790,7 +1790,7 @@ private:
 
         ImGui::TextUnformatted(XSTR(THPRAC_SETTING_ABOUT));
         ImGui::Separator();
-        ImGui::TextUnformatted(XSTR(TH_ABOUT_VERSION), GetVersionStr());
+        ImGui::Text(XSTR(TH_ABOUT_VERSION), GetVersionStr());
         ImGui::SameLine();
         if (ImGui::Button(XSTR(TH_ABOUT_SHOW_LICENCE))) {
             mGuiUpdFunc = [&]() { GuiLicenceWnd(); };
@@ -1799,7 +1799,7 @@ private:
         ImGui::TextUnformatted(XSTR(TH_ABOUT_AUTHOR));
         TextLink(XSTR(TH_ABOUT_WEBSITE), L"https://github.com/touhouworldcup/thprac");
         ImGui::NewLine();
-        ImGui::TextUnformatted(XSTR(TH_ABOUT_THANKS), "You!");
+        ImGui::Text(XSTR(TH_ABOUT_THANKS), "You!");
     }
 
     THCfgCombo mCfgLanguage { "language", 0, 3 };

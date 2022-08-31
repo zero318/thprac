@@ -852,12 +852,12 @@ void AboutOpt(const char* thanks_text)
 {
     static bool showLicense = false;
     if (BeginOptGroup<TH_ABOUT_THPRAC>()) {
-        ImGui::TextUnformatted(XSTR(TH_ABOUT_VERSION), GetVersionStr());
+        ImGui::Text(XSTR(TH_ABOUT_VERSION), GetVersionStr());
         ImGui::TextUnformatted(XSTR(TH_ABOUT_AUTHOR));
         ImGui::TextUnformatted(XSTR(TH_ABOUT_WEBSITE));
 
         ImGui::NewLine();
-        ImGui::TextUnformatted(XSTR(TH_ABOUT_THANKS), thanks_text ? thanks_text : "You!");
+        ImGui::Text(XSTR(TH_ABOUT_THANKS), thanks_text ? thanks_text : "You!");
 
         ImGui::NewLine();
         if (showLicense) {
