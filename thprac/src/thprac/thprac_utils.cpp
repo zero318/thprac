@@ -67,7 +67,7 @@ std::string GetSuffixFromPath(const char* pathC)
     return std::string("");
 }
 
-std::string GetSuffixFromPath(std::string& path)
+std::string GetSuffixFromPath(const std::string& path)
 {
     auto pos = path.rfind('.');
     if (pos != std::string::npos) {
@@ -76,7 +76,7 @@ std::string GetSuffixFromPath(std::string& path)
     return std::string("");
 }
 
-std::string GetDirFromFullPath(std::string& dir)
+std::string GetDirFromFullPath(const std::string& dir)
 {
     auto slashPos = dir.rfind('\\');
     if (slashPos == std::string::npos) {
@@ -88,7 +88,7 @@ std::string GetDirFromFullPath(std::string& dir)
     return dir.substr(0, slashPos + 1);
 }
 
-std::wstring GetDirFromFullPath(std::wstring& dir)
+std::wstring GetDirFromFullPath(const std::wstring& dir)
 {
     auto slashPos = dir.rfind(L'\\');
     if (slashPos == std::wstring::npos) {
@@ -100,7 +100,7 @@ std::wstring GetDirFromFullPath(std::wstring& dir)
     return dir.substr(0, slashPos + 1);
 }
 
-std::string GetNameFromFullPath(std::string& dir)
+std::string GetNameFromFullPath(const std::string& dir)
 {
     auto slashPos = dir.rfind('\\');
     if (slashPos == std::string::npos) {
@@ -112,7 +112,7 @@ std::string GetNameFromFullPath(std::string& dir)
     return dir.substr(slashPos + 1);
 }
 
-std::wstring GetNameFromFullPath(std::wstring& dir)
+std::wstring GetNameFromFullPath(const std::wstring& dir)
 {
     auto slashPos = dir.rfind(L'\\');
     if (slashPos == std::wstring::npos) {
@@ -124,7 +124,7 @@ std::wstring GetNameFromFullPath(std::wstring& dir)
     return dir.substr(slashPos + 1);
 }
 
-std::string GetCleanedPath(std::string& path)
+std::string GetCleanedPath(const std::string& path)
 {
     std::string result;
     wchar_t lastChar = '\0';
@@ -144,7 +144,7 @@ std::string GetCleanedPath(std::string& path)
     return result;
 }
 
-std::wstring GetCleanedPath(std::wstring& path)
+std::wstring GetCleanedPath(const std::wstring& path)
 {
     std::wstring result;
     wchar_t lastChar = '\0';
@@ -164,7 +164,7 @@ std::wstring GetCleanedPath(std::wstring& path)
     return result;
 }
 
-std::string GetUnifiedPath(std::string& path)
+std::string GetUnifiedPath(const std::string& path)
 {
     std::string result;
     wchar_t lastChar = '\0';
@@ -185,7 +185,7 @@ std::string GetUnifiedPath(std::string& path)
     return result;
 }
 
-std::wstring GetUnifiedPath(std::wstring& path)
+std::wstring GetUnifiedPath(const std::wstring& path)
 {
     std::wstring result;
     wchar_t lastChar = '\0';
@@ -809,7 +809,7 @@ bool DataRecOpt(adv_opt_ctx& ctx, bool preUpd, bool isInGame)
                             }
                             prev = event.valueData[0];
                         } else if (event.id == EVENT_SECTION) {
-                            chpater.push_back(std::pair<uint32_t, uint32_t>(frameData[i].frame, event.valueData[0].i));
+                            chpater.push_back(std::pair<uint32_t, uint32_t>{frameData[i].frame, event.valueData[0].i});
                         }
                     }
                 }
@@ -886,7 +886,7 @@ void AboutOpt(const char* thanks_text)
 
 #pragma region Replay System
 
-bool ReplaySaveParam(const wchar_t* rep_path, std::string& param)
+bool ReplaySaveParam(const wchar_t* rep_path, const std::string& param)
 {
     auto repFile = CreateFileW(rep_path, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (repFile == INVALID_HANDLE_VALUE)

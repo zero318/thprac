@@ -22,7 +22,7 @@
 #pragma comment(lib, "wininet.lib")
 #include <shlwapi.h>
 #pragma comment(lib, "Shlwapi.lib")
-#pragma comment(linker, "\"/manifestdependency:type='win32' \
+//#pragma comment(linker, "\"/manifestdependency:type='win32' \
 name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
 processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
@@ -270,7 +270,7 @@ void LauncherSettingSet(const char* name, const char* valueIn) {
     JsonAddMemberA(settingsJson, name, valueIn, gCfgJson.GetAllocator());
     LauncherCfgWrite();
 }
-void LauncherSettingSet(const char* name, std::string& valueIn)
+void LauncherSettingSet(const char* name, const std::string& valueIn)
 {
     LauncherSettingSet(name, valueIn.c_str());
 }
@@ -281,7 +281,7 @@ void LauncherSettingSet(const char* name, std::string& valueIn)
             throw std::runtime_error("Missing element: " #col);                 \
         if (!theme[#col].IsArray())                                             \
             throw std::runtime_error("Wrong format for " #col);                 \
-        auto& jsonVec = theme[#col].GetArray();                                 \
+        const auto& jsonVec = theme[#col].GetArray();                           \
         if (jsonVec.Size() < 4)                                                 \
             throw std::runtime_error("Not enough color channels in " #col);     \
         float vec[4];                                                           \
@@ -454,7 +454,7 @@ public:
     {
         return value;
     }
-    virtual void Set(std::string& _value)
+    virtual void Set(const std::string& _value)
     {
         value = _value;
         LauncherSettingSet(name.c_str(), value);
@@ -1705,7 +1705,7 @@ private:
                 themeIsUser = false;
             }
         }
-        if (themeIsUser && ImGui::BeginCombo("##themes_user", userThemes[userThemeIdx].utf8)) {
+        if (themeIsUser && userThemes.size() != 0 && ImGui ::BeginCombo("##themes_user", userThemes[userThemeIdx].utf8)) {
             for (size_t i = 0; i < userThemes.size(); i++) {
                 bool selected = i == userThemeIdx;
                 if (ImGui::Selectable(userThemes[i].utf8, selected)) {

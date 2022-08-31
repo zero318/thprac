@@ -474,7 +474,7 @@ public:
         }
         return false;
     }
-    void thcrapAdd(const char* gameId, std::string& cfg, bool use_thprac, bool flush = false)
+    void thcrapAdd(const char* gameId, const std::string& cfg, bool use_thprac, bool flush = false)
     {
         if (flush) {
             WriteGameCfg();
@@ -513,7 +513,7 @@ public:
     {
         cfgVec.clear();
         for (auto& cfg : mThcrapCfg) {
-            cfgVec.push_back(std::pair<std::string, bool>(cfg, false));
+            cfgVec.emplace_back(cfg, false);
         }
         for (int i = 0; i < 4; i++) {
             for (auto& game : gameVec[i]) {
@@ -969,7 +969,7 @@ public:
         }
         return TYPE_UNCERTAIN;
     }
-    static DWORD WINAPI ScanAddGame(THGameType type, std::string name, std::string& path, THGameSig& sig)
+    static DWORD WINAPI ScanAddGame(THGameType type, std::string name, const std::string& path, THGameSig& sig)
     {
         auto& game = THGameGui::singleton();
         switch (type) {
@@ -1049,7 +1049,7 @@ public:
 
         return 0;
     }
-    static DWORD WINAPI ScanSteamappPath(std::wstring& path)
+    static DWORD WINAPI ScanSteamappPath(const std::wstring& path)
     {
         for (auto& gameDef : gGameDefs) {
             if (gameDef.steamId == nullptr) {
@@ -1541,11 +1541,11 @@ public:
     {
         if (wcscmp(L"東方紅魔郷.exe", proc.szExeFile)) {
             if (proc.szExeFile[0] != L't' || proc.szExeFile[1] != L'h')
-                return nullptr;
+                return false;
             if (proc.szExeFile[2] < 0x30 || proc.szExeFile[2] > 0x39)
-                return nullptr;
+                return false;
             if (proc.szExeFile[3] < 0x30 || proc.szExeFile[3] > 0x39)
-                return nullptr;
+                return false;
         }
 
         // Open the related process
@@ -1555,7 +1555,7 @@ public:
             FALSE,
             proc.th32ProcessID);
         if (!hProc)
-            return nullptr;
+            return false;
 
         // Check THPrac signature
         DWORD sigAddr = 0;
@@ -1564,12 +1564,12 @@ public:
         ReadProcessMemory(hProc, (void*)0x40003c, &sigAddr, 4, &bytesReadRPM);
         if (bytesReadRPM != 4 || !sigAddr) {
             CloseHandle(hProc);
-            return nullptr;
+            return false;
         }
         ReadProcessMemory(hProc, (void*)(0x400000 + sigAddr - 4), &sigCheck, 4, &bytesReadRPM);
         if (bytesReadRPM != 4 || sigCheck) {
             CloseHandle(hProc);
-            return nullptr;
+            return false;
         }
 
         ExeSig sig;
@@ -1581,11 +1581,11 @@ public:
                 if (gameDef.exeSig.textSize != sig.textSize || gameDef.exeSig.timeStamp != sig.timeStamp) {
                     continue;
                 }
-                return &gameDef;
+                return true;
             }
         }
         CloseHandle(hProc);
-        return nullptr;   
+        return false;   
     }
     static DWORD WINAPI CheckProcess(DWORD process, std::wstring& exePath)
     {
@@ -1863,7 +1863,7 @@ public:
             return false;
         }
     }
-    bool TryLaunch(std::wstring& path)
+    bool TryLaunch(const std::wstring& path)
     {
         auto attr = GetFileAttributesW(path.c_str());
         auto dir = GetDirFromFullPath(path);
@@ -2435,7 +2435,7 @@ void LauncherGamesThcrapCfgGet(std::vector<std::pair<std::string, bool>>& cfgVec
     THGameGui::singleton().thcrapCfgGet(cfgVec, gameVec);
 }
 
-void LauncherGamesThcrapAdd(const char* gameId, std::string& cfg, bool use_thprac, bool flush)
+void LauncherGamesThcrapAdd(const char* gameId, const std::string& cfg, bool use_thprac, bool flush)
 {
     THGameGui::singleton().thcrapAdd(gameId, cfg, use_thprac, flush);
 }

@@ -82,15 +82,15 @@ std::wstring mb_to_utf16(const char* utf8);
 
 #pragma region Path
 std::string GetSuffixFromPath(const char* pathC);
-std::string GetSuffixFromPath(std::string& path);
-std::string GetDirFromFullPath(std::string& dir);
-std::wstring GetDirFromFullPath(std::wstring& dir);
-std::string GetNameFromFullPath(std::string& dir);
-std::wstring GetNameFromFullPath(std::wstring& dir);
-std::string GetCleanedPath(std::string& path);
-std::wstring GetCleanedPath(std::wstring& path);
-std::string GetUnifiedPath(std::string& path);
-std::wstring GetUnifiedPath(std::wstring& path);
+std::string GetSuffixFromPath(const std::string& path);
+std::string GetDirFromFullPath(const std::string& dir);
+std::wstring GetDirFromFullPath(const std::wstring& dir);
+std::string GetNameFromFullPath(const std::string& dir);
+std::wstring GetNameFromFullPath(const std::wstring& dir);
+std::string GetCleanedPath(const std::string& path);
+std::wstring GetCleanedPath(const std::wstring& path);
+std::string GetUnifiedPath(const std::string& path);
+std::wstring GetUnifiedPath(const std::wstring& path);
 #pragma endregion
 
 #pragma region Gui Wrapper
@@ -209,13 +209,13 @@ void AboutOpt(const char* thanks_text = nullptr);
 #pragma region Game BGM
 
 template <
-    int32_t play_addr,
-    int32_t stop_addr,
-    int32_t pause_addr,
-    int32_t resume_addr,
-    int32_t caller_addr>
+    uintptr_t play_addr,
+    uintptr_t stop_addr,
+    uintptr_t pause_addr,
+    uintptr_t resume_addr,
+    uintptr_t caller_addr>
 static bool ElBgmTest(bool hotkey_status, bool practice_status,
-    int32_t retn_addr, int32_t bgm_cmd, int32_t bgm_param, int32_t caller)
+    uintptr_t retn_addr, int32_t bgm_cmd, int32_t bgm_param, uintptr_t caller)
 {
     static bool mElStatus { false };
     static int mLockBgmId { -1 };
@@ -273,14 +273,14 @@ static bool ElBgmTest(bool hotkey_status, bool practice_status,
 }
 
 template <
-    int32_t play_addr,
-    int32_t play_addr_2,
-    int32_t stop_addr,
-    int32_t pause_addr,
-    int32_t resume_addr,
-    int32_t caller_addr>
+    uintptr_t play_addr,
+    uintptr_t play_addr_2,
+    uintptr_t stop_addr,
+    uintptr_t pause_addr,
+    uintptr_t resume_addr,
+    uintptr_t caller_addr>
 static bool ElBgmTestTemp(bool hotkey_status, bool practice_status,
-    int32_t retn_addr, int32_t bgm_cmd, int32_t bgm_param, int32_t caller)
+    uintptr_t retn_addr, int32_t bgm_cmd, int32_t bgm_param, uintptr_t caller)
 {
     static bool mElStatus { false };
     static int mLockBgmId { -1 };
@@ -344,7 +344,7 @@ static bool ElBgmTestTemp(bool hotkey_status, bool practice_status,
 
 typedef void*(__cdecl* p_malloc)(size_t size);
 
-bool ReplaySaveParam(const wchar_t* rep_path, std::string& param);
+bool ReplaySaveParam(const wchar_t* rep_path, const std::string& param);
 bool ReplayLoadParam(const wchar_t* rep_path, std::string& param);
 
 #pragma endregion

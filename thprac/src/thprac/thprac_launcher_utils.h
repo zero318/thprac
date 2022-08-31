@@ -250,7 +250,7 @@ static void GuiDescMarker(const char* descTxt)
     }
 }
 
-static int GuiCornerButton(const char* text, const char* text2 = nullptr, ImVec2& offset = ImVec2(1.5f, 0.5f), bool useCurrentY = false)
+static int GuiCornerButton(const char* text, const char* text2 = nullptr, const ImVec2& offset = ImVec2(1.5f, 0.5f), bool useCurrentY = false)
 {
     int result = 0;
     auto& style = ImGui::GetStyle();
@@ -281,7 +281,7 @@ static int GuiCornerButton(const char* text, const char* text2 = nullptr, ImVec2
     return result;
 }
 
-static bool GuiButtonRelCentered(const char* buttonText, float posYRel, ImVec2& sizeRel)
+static bool GuiButtonRelCentered(const char* buttonText, float posYRel, const ImVec2& sizeRel)
 {
     auto wndSize = ImGui::GetWindowSize();
     ImGui::SetCursorPosX((wndSize.x - wndSize.x * sizeRel.x) / 2.0f);

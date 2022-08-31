@@ -744,7 +744,7 @@ enum th_glossary_t
     TH_WARP,
 };
 
-static char* th_glossary_str[3][732]
+static const char* th_glossary_str[3][732]
 {
     {
         "",
@@ -3147,7 +3147,7 @@ enum th_sections_t : uint8_t
     TH06_ST4_MB_BOSS7,
 };
 
-static char* th_sections_str[3][4][107]
+static const char* th_sections_str[3][4][107]
 {
     {
         {
@@ -4793,7 +4793,7 @@ enum th_sections_t : uint8_t
     TH07_ST8_END_S11,
 };
 
-static char* th_sections_str[3][4][104]
+static const char* th_sections_str[3][4][104]
 {
     {
         {
@@ -6380,7 +6380,7 @@ enum th_sections_t : uint8_t
     TH08_ST7_END_LS,
 };
 
-static char* th_sections_str[3][4][105]
+static const char* th_sections_str[3][4][105]
 {
     {
         {
@@ -7885,7 +7885,7 @@ enum th_sections_t : uint8_t
     A0000ERROR,
 };
 
-static char* th_sections_str[3][4][1]
+static const char* th_sections_str[3][4][1]
 {
     {
         {
@@ -8028,7 +8028,7 @@ enum th_sections_t : uint8_t
     TH10_ST7_END_S10,
 };
 
-static char* th_sections_str[3][4][69]
+static const char* th_sections_str[3][4][69]
 {
     {
         {
@@ -9054,7 +9054,7 @@ enum th_sections_t : uint8_t
     ALCOSTG_ST3_BOSS9,
 };
 
-static char* th_sections_str[3][4][19]
+static const char* th_sections_str[3][4][19]
 {
     {
         {
@@ -9481,7 +9481,7 @@ enum th_sections_t : uint8_t
     TH11_ST7_END_S10,
 };
 
-static char* th_sections_str[3][4][89]
+static const char* th_sections_str[3][4][89]
 {
     {
         {
@@ -10829,7 +10829,7 @@ enum th_sections_t : uint8_t
     TH12_ST7_END_S10,
 };
 
-static char* th_sections_str[3][4][72]
+static const char* th_sections_str[3][4][72]
 {
     {
         {
@@ -12046,7 +12046,7 @@ enum th_sections_t : uint8_t
     TH128_EX_END_S10,
 };
 
-static char* th_sections_str[3][4][157]
+static const char* th_sections_str[3][4][157]
 {
     {
         {
@@ -14384,7 +14384,7 @@ enum th_sections_t : uint8_t
     TH13_ST7_END_S10,
 };
 
-static char* th_sections_str[3][4][73]
+static const char* th_sections_str[3][4][73]
 {
     {
         {
@@ -15532,7 +15532,7 @@ enum th_sections_t : uint8_t
     TH14_ST4B_BOSS6,
 };
 
-static char* th_sections_str[3][4][89]
+static const char* th_sections_str[3][4][89]
 {
     {
         {
@@ -16937,7 +16937,7 @@ enum th_sections_t : uint8_t
     TH15_ST7_END_S10,
 };
 
-static char* th_sections_str[3][4][74]
+static const char* th_sections_str[3][4][74]
 {
     {
         {
@@ -18101,7 +18101,7 @@ enum th_sections_t : uint8_t
     TH16_ST7_END_S10,
 };
 
-static char* th_sections_str[3][4][73]
+static const char* th_sections_str[3][4][73]
 {
     {
         {
@@ -19240,7 +19240,7 @@ enum th_sections_t : uint8_t
     TH17_ST7_END_S10,
 };
 
-static char* th_sections_str[3][4][67]
+static const char* th_sections_str[3][4][67]
 {
     {
         {
@@ -20315,7 +20315,7 @@ enum th_sections_t : uint8_t
     TH18_ST7_END_S10,
 };
 
-static char* th_sections_str[3][4][66]
+static const char* th_sections_str[3][4][66]
 {
     {
         {
