@@ -184,7 +184,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup>
-	<BuildType Condition="'$(Configuration)'=='Debug'">Debug</BuildType>
+    <BuildType Condition="'$(Configuration)'=='Debug'">Debug</BuildType>
     <BuildType Condition="'$(Configuration)'=='Release'">Release</BuildType>
     <BuildType Condition="'$(Configuration)'=='DebugLLVM'">Debug</BuildType>
     <BuildType Condition="'$(Configuration)'=='ReleaseLLVM'">Release</BuildType>
@@ -226,7 +226,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
-	  <AdditionalManifestDependencies>type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'</AdditionalManifestDependencies>
+      <AdditionalManifestDependencies>type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'</AdditionalManifestDependencies>
     </Link>
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -234,12 +234,13 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;HAVE_SSE2;_CRT_SECURE_NO_WARNINGS;_WINDOWS;WINVER=0x0601;_WIN32_WINNT=0x0601;DISTORM_LIGHT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard Condition="'$(ToolsetType)'=='MSVC'">stdcpp20</LanguageStandard>
+      <LanguageStandard Condition="'$(ToolsetType)'=='ClangCL'">stdcpplatest</LanguageStandard>
       <ConformanceMode>false</ConformanceMode>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <ControlFlowGuard>false</ControlFlowGuard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
-	  <AdditionalOptions Condition="'$(ToolsetType)'=='ClangCL'">-Wno-ambiguous-reversed-operator -Wno-unused-function -Wno-unused-const-variable -Wno-unused-variable -Wno-unused-but-set-variable -Wno-unused-private-field -Wno-unused-label -Wno-unused-local-typedef -Wno-missing-braces %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(ToolsetType)'=='ClangCL'">-Wno-ambiguous-reversed-operator -Wno-unused-function -Wno-unused-const-variable -Wno-unused-variable -Wno-unused-but-set-variable -Wno-unused-private-field -Wno-unused-label -Wno-unused-local-typedef -Wno-missing-braces %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(BuildType)|$(Platform)'=='Debug|Win32'">
