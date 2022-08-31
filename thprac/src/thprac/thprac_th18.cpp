@@ -221,7 +221,7 @@ namespace TH18 {
         }
         virtual void OnContentUpdate() override
         {
-            ImGui::Text(XSTR(TH_MENU));
+            ImGui::TextUnformatted(XSTR(TH_MENU));
             ImGui::Separator();
 
             PracticeMenu();
@@ -476,7 +476,7 @@ namespace TH18 {
         {
             SetTitle("Mod Menu");
             SetFade(0.5f, 0.5f);
-            SetCursor(false);
+            SetCursor(nullptr);
             SetPos(10.0f, 10.0f);
             SetSize(0.0f, 0.0f);
             SetWndFlag(
@@ -654,10 +654,10 @@ namespace TH18 {
                     ImGui::EndDisabled();
                 }
             } else {
-                ImGui::Text(XSTR(TH18_MARKET_MANIP_DESC1));
-                ImGui::Text(XSTR(TH18_MARKET_MANIP_DESC2));
-                ImGui::Text(XSTR(TH18_MARKET_MANIP_DESC3));
-                ImGui::Text(XSTR(TH18_MARKET_MANIP_DESC4));
+                ImGui::TextUnformatted(XSTR(TH18_MARKET_MANIP_DESC1));
+                ImGui::TextUnformatted(XSTR(TH18_MARKET_MANIP_DESC2));
+                ImGui::TextUnformatted(XSTR(TH18_MARKET_MANIP_DESC3));
+                ImGui::TextUnformatted(XSTR(TH18_MARKET_MANIP_DESC4));
             }
         }
         virtual void OnPreUpdate() override
@@ -871,7 +871,7 @@ namespace TH18 {
         }
         virtual void OnContentUpdate() override
         {
-            ImGui::Text(XSTR(TH_SPELL_PRAC));
+            ImGui::TextUnformatted(XSTR(TH_SPELL_PRAC));
             ImGui::Separator();
 
             PracticeMenu();
@@ -1346,7 +1346,7 @@ namespace TH18 {
             bool wndFocus = true;
 
             if (BeginOptGroup<TH18_REPLAY_FIX>()) {
-                ImGui::Text(XSTR(TH18_REPFIX_DESC));
+                ImGui::TextUnformatted(XSTR(TH18_REPFIX_DESC));
                 if (mShowFixInstruction) {
                     if (ImGui::Button(XSTR(TH18_REPFIX_HIDE_INS)))
                         mShowFixInstruction = false;
@@ -1357,7 +1357,7 @@ namespace TH18 {
                 if (mShowFixInstruction) {
                     //ImGui::BeginChild("INSTRUCTION", ImVec2(0.0f, GetRelHeight(0.3f)), true, ImGuiWindowFlags_AlwaysAutoResize);
                     ImGui::PushTextWrapPos(GetRelWidth(0.95f));
-                    ImGui::Text(XSTR(TH18_REPFIX_INS));
+                    ImGui::TextUnformatted(XSTR(TH18_REPFIX_INS));
                     ImGui::PopTextWrapPos();
                     //ImGui::EndChild();
                 }
@@ -1374,7 +1374,7 @@ namespace TH18 {
                             }
                         }
                     } else {
-                        ImGui::Text(XSTR(TH18_REPFIX_NOTHING));
+                        ImGui::TextUnformatted(XSTR(TH18_REPFIX_NOTHING));
                     }
                 } else {
                     ImGui::Text(XSTR(TH18_REPFIX_LOCKED), mRepOriginalName.c_str());
@@ -1389,7 +1389,7 @@ namespace TH18 {
 
                     auto isAvailable = GetAvailability();
                     if (!isAvailable) {
-                        ImGui::Text(XSTR(TH18_REPFIX_MISMATCH));
+                        ImGui::TextUnformatted(XSTR(TH18_REPFIX_MISMATCH));
                         ImGui::BeginDisabled();
                     }
 
@@ -1399,7 +1399,7 @@ namespace TH18 {
                         if (data.activeCardId != -1) {
                             ImGui::Text("Stage %s:", mStageStr[data.stage]);
                             ImGui::SameLine();
-                            ImGui::Text(XSTR(TH18_REPFIX_INITIAL_CARD));
+                            ImGui::TextUnformatted(XSTR(TH18_REPFIX_INITIAL_CARD));
                             ImGui::SameLine(0.0f, 0.0f);
 
                             sprintf_s(comboId, "##active_card_idx_st%d", data.stage);
@@ -1596,7 +1596,7 @@ namespace TH18 {
         {
             bool wndFocus = true;
 
-            ImGui::Text(XSTR(TH_ADV_OPT));
+            ImGui::TextUnformatted(XSTR(TH_ADV_OPT));
             ImGui::Separator();
             ImGui::BeginChild("Adv. Options", ImVec2(0.0f, 0.0f));
 
@@ -1631,7 +1631,7 @@ namespace TH18 {
                 EndOptGroup();
             }
             if (BeginOptGroup<TH18_BUG_FIX>()) {
-                ImGui::Text(XSTR(TH18_BUG_FIX_DESC));
+                ImGui::TextUnformatted(XSTR(TH18_BUG_FIX_DESC));
 
                 if (ImGui::Checkbox(XSTR(TH18_MUKADE_FIX), &mukadeFix)) {
                     th18_mukade_fix.Toggle(mukadeFix);

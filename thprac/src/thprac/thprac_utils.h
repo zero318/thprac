@@ -76,6 +76,9 @@ struct MappedFile {
 #pragma region Locale
 std::string utf16_to_utf8(const wchar_t* utf16);
 std::wstring utf8_to_utf16(const char* utf8);
+inline std::wstring utf8_to_utf16(const char8_t* utf8) {
+    return utf8_to_utf16((const char*)utf8);
+}
 std::string utf16_to_mb(const wchar_t* utf16);
 std::wstring mb_to_utf16(const char* utf8);
 #pragma endregion

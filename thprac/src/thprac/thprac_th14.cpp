@@ -185,7 +185,7 @@ namespace TH14 {
         }
         virtual void OnContentUpdate() override
         {
-            ImGui::Text(XSTR(TH_MENU));
+            ImGui::TextUnformatted(XSTR(TH_MENU));
             ImGui::Separator();
 
             PracticeMenu();
@@ -409,7 +409,7 @@ namespace TH14 {
         {
             SetTitle("Mod Menu");
             SetFade(0.5f, 0.5f);
-            SetCursor(false);
+            SetCursor(nullptr);
             SetPos(10.0f, 10.0f);
             SetSize(0.0f, 0.0f);
             SetWndFlag(
@@ -594,7 +594,7 @@ namespace TH14 {
         }
         virtual void OnContentUpdate() override
         {
-            ImGui::Text(XSTR(TH_SPELL_PRAC));
+            ImGui::TextUnformatted(XSTR(TH_SPELL_PRAC));
             ImGui::Separator();
 
             PracticeMenu();
@@ -966,15 +966,15 @@ namespace TH14 {
             if (mLock) {
                 ImGui::EndDisabled();
                 ImGui::SameLine();
-                ImGui::Text(XSTR(TH14_LOCKED));
+                ImGui::TextUnformatted(XSTR(TH14_LOCKED));
             }
 
             if (thMarisaLaser->mState == 0) {
-                ImGui::Text(XSTR(TH14_MODE_NONE_DESC));
+                ImGui::TextUnformatted(XSTR(TH14_MODE_NONE_DESC));
             } else if (thMarisaLaser->mState == 1) {
-                ImGui::Text(XSTR(TH14_MODE_NORMAL_DESC));
+                ImGui::TextUnformatted(XSTR(TH14_MODE_NORMAL_DESC));
             } else if (thMarisaLaser->mState == 2) {
-                ImGui::Text(XSTR(TH14_MODE_PLAYBACK_DESC));
+                ImGui::TextUnformatted(XSTR(TH14_MODE_PLAYBACK_DESC));
                 if (mRepName[0]) {
                     ImGui::Text(XSTR(TH14_SELECTED_REPLAY), mRepName);
                     if (thMarisaLaser->mRecordsPlayback.size()) {
@@ -989,18 +989,18 @@ namespace TH14 {
                             } else {
                                 ImGui::Text(XSTR(TH14_RECORD), i++, record.stage, record.frame, *(uint32_t*)&(record.value));
                                 ImGui::SameLine(0.0f, 0.0f);
-                                ImGui::Text(XSTR(TH14_CORRECTION[record.fix]));
+                                ImGui::TextUnformatted(XSTR(TH14_CORRECTION[record.fix]));
                             }
                         }
                     } else {
-                        ImGui::Text(XSTR(TH14_REPLAY_NO_RECORDS));
+                        ImGui::TextUnformatted(XSTR(TH14_REPLAY_NO_RECORDS));
                     }
                 } else {
-                    ImGui::Text(XSTR(TH14_SELECTED_NONE));
+                    ImGui::TextUnformatted(XSTR(TH14_SELECTED_NONE));
                 }
                 // TODO: Replay info
             } else if (thMarisaLaser->mState == 3) {
-                ImGui::Text(XSTR(TH14_MODE_RECOVER_DESC));
+                ImGui::TextUnformatted(XSTR(TH14_MODE_RECOVER_DESC));
 
                 if (ImGui::Button(XSTR(TH14_SAVE))) {
                     if (mRepName[0]) {
@@ -1020,12 +1020,12 @@ namespace TH14 {
                 if (mRepName[0])
                     ImGui::Text(XSTR(TH14_SELECTED_REPLAY), mRepName);
                 else
-                    ImGui::Text(XSTR(TH14_SELECTED_NONE));
+                    ImGui::TextUnformatted(XSTR(TH14_SELECTED_NONE));
 
                 ImGui::Separator();
                 auto it = thMarisaLaser->mRecordsRecover.begin();
                 if (it == thMarisaLaser->mRecordsRecover.end())
-                    ImGui::Text(XSTR(TH14_NO_RECORDS));
+                    ImGui::TextUnformatted(XSTR(TH14_NO_RECORDS));
                 else {
                     int i = 1;
                     for (; it != thMarisaLaser->mRecordsRecover.end(); ++i) {
@@ -1310,7 +1310,7 @@ namespace TH14 {
         {
             bool wndFocus = true;
 
-            ImGui::Text(XSTR(TH_ADV_OPT));
+            ImGui::TextUnformatted(XSTR(TH_ADV_OPT));
             ImGui::Separator();
             ImGui::BeginChild("Adv. Options", ImVec2(0.0f, 0.0f));
 

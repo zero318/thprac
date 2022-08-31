@@ -6,12 +6,10 @@ namespace THPrac {
 
 void* SzAlloc(ISzAllocPtr p, size_t size)
 {
-    p = p;
     return malloc(size);
 }
 void SzFree(ISzAllocPtr p, void* address)
 {
-    p = p;
     free(address);
 }
 ISzAlloc g_Alloc = { SzAlloc, SzFree };

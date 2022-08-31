@@ -485,7 +485,7 @@ void MsgBox(UINT type, const char* title, const char* msg, const char* msg2 = nu
 void CenteredText(const char* text, float wndX)
 {
     ImGui::SetCursorPosX((wndX - ImGui::CalcTextSize(text).x) / 2.0f);
-    ImGui::Text(text);
+    ImGui::TextUnformatted(text);
 }
 
 float GetRelWidth(float rel)
@@ -584,7 +584,7 @@ bool GameFPSOpt(adv_opt_ctx& ctx)
     static int fpsMultiplier = 0;
     static bool canFpsChangeFreely = false;
     bool clickedApply = false;
-    char* fpsMultiplierStr;
+    const char* fpsMultiplierStr;
     auto fontSize = ImGui::GetFontSize();
 
     if (fps == 0) {
@@ -623,9 +623,9 @@ bool GameFPSOpt(adv_opt_ctx& ctx)
     if (ctx.fps_status <= 0) {
         ImGui::PushTextWrapPos();
         if (ctx.fps_status == 0)
-            ImGui::TextColored(ImColor(255, 0, 0), XSTR(TH_FPS_ERR));
+            ImGui::TextColored(ImColor(255, 0, 0), "%s", XSTR(TH_FPS_ERR));
         else if (ctx.fps_status == -1)
-            ImGui::TextColored(ImColor(255, 0, 0), XSTR(TH_FPS_UNSUPPORTED));
+            ImGui::TextColored(ImColor(255, 0, 0), "%s", XSTR(TH_FPS_UNSUPPORTED));
         ImGui::PopTextWrapPos();
         ImGui::BeginDisabled();
     }
@@ -664,10 +664,7 @@ bool GameFPSOpt(adv_opt_ctx& ctx)
     if (canFpsChangeFreely) {
         ImGui::DragInt(XSTR(TH_FPS_ADJ), &fps, 1.0f, 60, 6000);
         if (!ImGui::IsItemActive())
-            if (fps < 60)
-                fps = 60;
-            else if (fps > 6000)
-                fps = 6000;
+            fps = std::clamp(fps, 60, 6000);
     } else {
         ImGui::SliderInt(XSTR(TH_FPS_ADJ), &fpsMultiplier, 0, 8, fpsMultiplierStr);
         fps = fpsMultiplier * 15 + 60;
@@ -705,7 +702,7 @@ bool GameFPSOpt(adv_opt_ctx& ctx)
         if (ImGui::Button(XSTR(TH_ADV_OPT_APPLY))) {
             clickedApply = true;
             if (fpsStatic > fps && ctx.fps_status != 1)
-                ImGui::Text(XSTR(TH_FPS_LOWERING));
+                ImGui::TextUnformatted(XSTR(TH_FPS_LOWERING));
             fpsStatic = fps;
             ctx.fps_replay_slow = fpsSlowStatic;
             ctx.fps_replay_fast = fpsFastStatic * 60;
@@ -855,12 +852,12 @@ void AboutOpt(const char* thanks_text)
 {
     static bool showLicense = false;
     if (BeginOptGroup<TH_ABOUT_THPRAC>()) {
-        ImGui::Text(XSTR(TH_ABOUT_VERSION), GetVersionStr());
-        ImGui::Text(XSTR(TH_ABOUT_AUTHOR));
-        ImGui::Text(XSTR(TH_ABOUT_WEBSITE));
+        ImGui::TextUnformatted(XSTR(TH_ABOUT_VERSION), GetVersionStr());
+        ImGui::TextUnformatted(XSTR(TH_ABOUT_AUTHOR));
+        ImGui::TextUnformatted(XSTR(TH_ABOUT_WEBSITE));
 
         ImGui::NewLine();
-        ImGui::Text(XSTR(TH_ABOUT_THANKS), thanks_text ? thanks_text : "You!");
+        ImGui::TextUnformatted(XSTR(TH_ABOUT_THANKS), thanks_text ? thanks_text : "You!");
 
         ImGui::NewLine();
         if (showLicense) {

@@ -356,7 +356,7 @@ namespace TH06 {
         }
         virtual void OnContentUpdate() override
         {
-            ImGui::Text(XSTR(TH_MENU));
+            ImGui::TextUnformatted(XSTR(TH_MENU));
             ImGui::Separator();
 
             PracticeMenu(mNavFocus);
@@ -912,7 +912,7 @@ namespace TH06 {
         void ContentUpdate() 
         {
             *((int32_t*)0x6c6eb0) = 3;
-            ImGui::Text(XSTR(TH_ADV_OPT));
+            ImGui::TextUnformatted(XSTR(TH_ADV_OPT));
             ImGui::Separator();
             ImGui::BeginChild("Adv. Options", ImVec2(0.0f, 0.0f));
 
@@ -965,9 +965,9 @@ namespace TH06 {
     void ECLNameFix()
     {
         int32_t thisPtr = *((int32_t*)0x6d4588);
-        char* str0601 = "data/eff06.anm";
-        char* str0701 = "data/eff07.anm";
-        char* str0702 = "data/face12c.anm";
+        const char* str0601 = "data/eff06.anm";
+        const char* str0701 = "data/eff07.anm";
+        const char* str0702 = "data/face12c.anm";
 
         if (thPracParam.stage == 5) {
             __asm {
