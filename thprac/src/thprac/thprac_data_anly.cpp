@@ -202,9 +202,9 @@ void AnlyLoadTest()
     }
 }
 
-void(__stdcall* g_dataBatchRem)(EventRecord&) = nullptr;
-void(__stdcall* g_dataBatchResetRem)() = nullptr;
-void DataBatchRem(EventRecord& rec, void(__stdcall* callback)(EventRecord&))
+void(* g_dataBatchRem)(EventRecord&) = nullptr;
+void(* g_dataBatchResetRem)() = nullptr;
+void DataBatchRem(EventRecord& rec, void(* callback)(EventRecord&))
 {
     if (callback) {
         g_dataBatchRem = callback;
@@ -214,7 +214,7 @@ void DataBatchRem(EventRecord& rec, void(__stdcall* callback)(EventRecord&))
         g_dataBatchRem(rec);
     }
 }
-void DataBatchResetRem(void(__stdcall* callback)())
+void DataBatchResetRem(void(* callback)())
 {
     if (callback) {
         g_dataBatchResetRem = callback;

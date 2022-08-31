@@ -324,7 +324,7 @@ void AnlyLoadTest();
 
 static uint8_t g_counterHookCallbackTemplate[] { 0x83, 0x05, 0xCC, 0xCC, 0xCC, 0xCC, 0x01, 0x50, 0x50, 0xa1, 0xFF, 0xFF, 0xFF, 0xFF, 0x89, 0x44, 0x24, 0x04, 0x58, 0xc3 };
 template <uint32_t id>
-uint32_t& DataRef(uint32_t addr = 0, uint32_t(__stdcall* callback)(int) = nullptr)
+uint32_t& DataRef(uint32_t addr = 0, uint32_t(* callback)(int) = nullptr)
 {
     static uint32_t m_counter = 0;
     static void* m_target = nullptr;
@@ -376,13 +376,6 @@ uint32_t& DataRef(uint32_t addr = 0, uint32_t(__stdcall* callback)(int) = nullpt
     }
     return m_counter;
 }
-#ifdef __clang__
-template <uint32_t id, typename T, std::enable_if_t<std::is_invocable_r_v<uint32_t, T, int>, bool> = true>
-uint32_t& DataRef(uint32_t addr = 0, const T& callback = nullptr)
-{
-    return DataRef<id>(addr, +callback);
-}
-#endif
 template <uint64_t id>
 HookCtx* ImHook(void* addr = nullptr, void(__stdcall* callback)(PCONTEXT) = nullptr)
 {
@@ -433,20 +426,8 @@ void DataBatchReset()
     DataRef<id>() = 0;
     DataBatchReset<rest...>();
 }
-void DataBatchRem(EventRecord& rec, void(__stdcall* callback)(EventRecord&) = nullptr);
-void DataBatchResetRem(void(__stdcall* callback)() = nullptr);
-#ifdef __clang__
-template <typename T, std::enable_if_t<std::is_invocable_r_v<void, T, EventRecord&>, bool> = true>
-void DataBatchRem(EventRecord& rec, const T& callback)
-{
-    return DataBatchRem(rec, +callback);
-}
-template <typename T, std::enable_if_t<std::is_invocable_r_v<void, T>, bool> = true>
-void DataBatchResetRem(T callback)
-{
-    return DataBatchResetRem(+callback);
-}
-#endif
+void DataBatchRem(EventRecord& rec, void(* callback)(EventRecord&) = nullptr);
+void DataBatchResetRem(void(* callback)() = nullptr);
 template <void* end = nullptr>
 void DataBatch(int idx = 0)
 {
